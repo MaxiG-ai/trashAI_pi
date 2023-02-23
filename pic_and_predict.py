@@ -61,7 +61,7 @@ _, height, width, _ = interpreter.get_input_details()[0]['shape']
 print("Input shape: ", height, width)
 
 # Load sample image to be classified
-image = Image.open("img/2023-02-11_16-04-39.jpg").convert('RGB').resize((width, height))
+image = Image.open(pic_name).convert('RGB').resize((width, height))
 
 # using tflite to predict image class
 time_start = time.time()
