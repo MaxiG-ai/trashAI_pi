@@ -25,8 +25,8 @@ def classify_image(interpreter, image, top_k=1):
   ordered = np.argpartition(-output, 1)
   return [(i, output[i]) for i in ordered[:top_k]][0]
 
-model_path = "test_model_mobile_net/mobilenet_v1_1.0_224_quant.tflite"
-label_path = "test_model_mobile_net/labels_mobilenet_quant_v1_224.txt"
+model_path = "model/model_tflite_2023-02-23_21-01-45.tflite"
+label_path = "model/trash_labels.txt"
 
 interpreter = Interpreter(model_path=model_path)
 print("Model loaded succesfully!")
@@ -36,7 +36,7 @@ _, height, width, _ = interpreter.get_input_details()[0]['shape']
 print("Input shape: ", height, width)
 
 # Load sample image to be classified
-image = Image.open("img/2023-02-11_16-04-39.jpg").convert('RGB').resize((width, height))
+image = Image.open("img/metal5.jpg").convert('RGB').resize((width, height))
 
 # using tflite to predict image class
 time_start = time.time()
