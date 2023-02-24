@@ -12,18 +12,19 @@ def set_input_tensor(interpreter, image):
   tensor_index = interpreter.get_input_details()[0]['index']
   input_tensor = interpreter.tensor(tensor_index)()[0]
   input_tensor[:, :] = image
-  print(input_tensor.shape, input_tensor)
+  input_tensor.shape, input_tensor
 
 def classify_image(interpreter, image, top_k=1):
   set_input_tensor(interpreter, image)
 
   interpreter.invoke()
   output_details = interpreter.get_output_details()[0]
+  print("output details: ", output_details)
   output = np.squeeze(interpreter.get_tensor(output_details['index']))
 
   scale, zero_point = output_details['quantization']
   output = scale * (output - zero_point)
-  print(output.shape, output)
+  print("output after processing \n", output.shape, output)
 
   ordered = np.argpartition(-output, 1)
   return [(i, output[i]) for i in ordered[:top_k]][0]
@@ -39,7 +40,7 @@ _, height, width, _ = interpreter.get_input_details()[0]['shape']
 print("Input shape: ", height, width)
 
 # Load sample image to be classified
-image = Image.open("img/metal51.jpg").convert('RGB').resize((width, height))
+image = Image.open("img/plastic193.jpg").convert('RGB').resize((width, height))
 
 print(image)
 
