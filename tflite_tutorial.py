@@ -26,7 +26,7 @@ def classify_image(interpreter, image, top_k=1):
   ordered = np.argpartition(-output, 1)
   return [(i, output[i]) for i in ordered[:top_k]][0]
 
-model_path = "model/model/transfer_model_tflite_2023-02-24_15-14.tflite"
+model_path = "model/transfer_model_tflite_2023-02-24_15-14.tflite"
 label_path = "model/trash_classes.txt"
 
 interpreter = Interpreter(model_path=model_path)
