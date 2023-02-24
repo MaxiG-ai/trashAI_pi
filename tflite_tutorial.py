@@ -20,7 +20,6 @@ def classify_image(interpreter, image, top_k=1):
 
   interpreter.invoke()
   output_details = interpreter.get_output_details()[0]
-  print("output details: ", output_details)
   output = np.squeeze(interpreter.get_tensor(output_details['index']))
 
   scale, zero_point = output_details['quantization']
@@ -41,7 +40,7 @@ _, height, width, _ = interpreter.get_input_details()[0]['shape']
 print("Input shape: ", height, width)
 
 # Load sample image to be classified
-image = Image.open("img/plastic193.jpg").convert('RGB').resize((width, height))
+image = Image.open("img/paper83.jpg").convert('RGB').resize((width, height))
 
 # using tflite to predict image class
 time_start = time.time()
