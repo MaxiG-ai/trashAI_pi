@@ -1,5 +1,6 @@
 from tflite_runtime.interpreter import Interpreter
 from PIL import Image
+import tensorflow as tf
 import numpy as np
 import time
 
@@ -36,14 +37,16 @@ _, height, width, _ = interpreter.get_input_details()[0]['shape']
 print("Input shape: ", height, width)
 
 # Load sample image to be classified
-image = Image.open("img/metal5.jpg").convert('RGB').resize((width, height))
+image = Image.open("img/metal51.jpg").convert('RGB').resize((width, height))
+
+print(image)
 
 # using tflite to predict image class
 time_start = time.time()
 label_id, prob = classify_image(interpreter, image)
 time_end = time.time()
 print("Prediction time: ", np.round(time_end - time_start, 3))
-
+print("Label ID: ", label_id)
 # Load labels
 labels = load_labels(label_path)
 cl_label = labels[label_id]
