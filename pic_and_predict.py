@@ -49,8 +49,8 @@ def classify_image(interpreter, image, top_k=1):
   return [(i, output[i]) for i in ordered[:top_k]][0]
 
 # defining input paths for tflite model and labels
-model_path = "test_model_mobile_net/mobilenet_v1_1.0_224_quant.tflite"
-label_path = "test_model_mobile_net/labels_mobilenet_quant_v1_224.txt"
+model_path = "model/model_tflite_2023-02-23_21-01-45.tflite"
+label_path = "model/trash_labels.txt.txt"
 
 # Load the TFLite model and allocate tensors.   
 interpreter = Interpreter(model_path=model_path)

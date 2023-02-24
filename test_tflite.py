@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-TFLITE_FILE_PATH="model_2023-02-11_XXXXX.tflite"
+TFLITE_FILE_PATH="models/model_2023-02-11_15-06-27.tflite"
 
 interpreter = tf.lite.Interpreter(TFLITE_FILE_PATH)
 # There is only 1 signature defined in the model,

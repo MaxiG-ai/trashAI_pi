@@ -25,8 +25,8 @@ def classify_image(interpreter, image, top_k=1):
   ordered = np.argpartition(-output, 1)
   return [(i, output[i]) for i in ordered[:top_k]][0]
 
-model_path = "model/model_tflite_2023-02-23_21-01-45.tflite"
-label_path = "model/trash_labels.txt"
+model_path = "model/model/transfer_model_tflite_2023-02-24_15-14.tflite"
+label_path = "model/trash_classes.txt"
 
 interpreter = Interpreter(model_path=model_path)
 print("Model loaded succesfully!")
@@ -48,4 +48,3 @@ print("Prediction time: ", np.round(time_end - time_start, 3))
 labels = load_labels(label_path)
 cl_label = labels[label_id]
 print(f"Predicted class: {cl_label} with Accuracy: {np.round(prob*100, 2)} %")
-
