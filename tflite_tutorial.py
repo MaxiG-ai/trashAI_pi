@@ -12,7 +12,8 @@ def set_input_tensor(interpreter, image):
   tensor_index = interpreter.get_input_details()[0]['index']
   input_tensor = interpreter.tensor(tensor_index)()[0]
   input_tensor[:, :] = image
-  interpreter.set_tensor(tensor_index, input_tensor)
+  img_array = tf.expand_dims(input_tensor, 0)
+  interpreter.set_tensor(tensor_index, img_array)
 
 def classify_image(interpreter, image, top_k=1):
   set_input_tensor(interpreter, image)
