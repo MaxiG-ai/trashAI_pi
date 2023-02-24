@@ -12,7 +12,7 @@ def set_input_tensor(interpreter, image):
   tensor_index = interpreter.get_input_details()[0]['index']
   input_tensor = interpreter.tensor(tensor_index)()[0]
   input_tensor[:, :] = image
-  input_tensor.shape, input_tensor
+  interpreter.set_tensor(tensor_index, input_tensor)
 
 def classify_image(interpreter, image, top_k=1):
   set_input_tensor(interpreter, image)
@@ -41,8 +41,6 @@ print("Input shape: ", height, width)
 
 # Load sample image to be classified
 image = Image.open("img/plastic193.jpg").convert('RGB').resize((width, height))
-
-print(image)
 
 # using tflite to predict image class
 time_start = time.time()
