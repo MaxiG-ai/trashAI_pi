@@ -12,6 +12,7 @@ def set_input_tensor(interpreter, image):
   tensor_index = interpreter.get_input_details()[0]['index']
   input_tensor = interpreter.tensor(tensor_index)()[0]
   input_tensor[:, :] = image
+  print(input_tensor.shape, input_tensor)
 
 def classify_image(interpreter, image, top_k=1):
   set_input_tensor(interpreter, image)
@@ -22,6 +23,7 @@ def classify_image(interpreter, image, top_k=1):
 
   scale, zero_point = output_details['quantization']
   output = scale * (output - zero_point)
+  print(output.shape, output)
 
   ordered = np.argpartition(-output, 1)
   return [(i, output[i]) for i in ordered[:top_k]][0]
